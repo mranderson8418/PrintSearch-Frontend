@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- <script src="get-all-prints.js" defer></script> -->
+	<title>Data Display</title>
+
+
+	<style>
+		html {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+
+		body {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			font-size: 15px;
+
+
+
+		}
+
+		div.table-output table {
+			min-height: 2rem;
+			min-width: 100%;
+			max-width: 100%;
+			border-collapse: collapse;
+		}
+
+		div.table-output table thead tr th {
+			padding-top: 1rem;
+			padding-bottom: 1rem;
+			max-height: 4 rem;
+			background-color: rgb(38, 78, 152);
+			color: white;
+
+
+		}
+
+		div.table-output table thead tr td {
+			padding-top: 1rem;
+			padding-bottom: 1rem;
+			max-height: 4 rem;
+			background-color: rgb(38, 78, 152);
+			color: white;
+
+
+		}
+
+		th,
+		td {
+			border: .125rem solid black;
+			padding: clamp(.8rem 1rem 2rem);
+			text-align: center;
+
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+
+		@media print {
+			@page {
+				size: landscape;
+			}
+		}
+
+		div.home {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+			margin-top: 1.5rem;
+			cursor: pointer;
+			margin: 10px 0;
+			padding: .5rem;
+			background-color: rgb(38, 78, 152);
+			border: none;
+			border-radius: 5px;
+			font-size: 1.2rem;
+			color: white;
+			text-decoration: none;
+			box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+			transition: background-color 0.3s ease, transform 0.2s ease;
+			min-width: 10rem;
+			max-width: 10rem;
+			margin: 1rem;
+
+
+		}
+
+		div.home a {
+			text-decoration: none;
+		}
+
+		button#get-all-prints,
+		button#prevPage,
+		button#nextPage {
+			margin-top: 1.5rem;
+			cursor: pointer;
+			display: block;
+			margin: 10px 0;
+			padding: .5rem;
+			background-color: rgb(38, 78, 152);
+			border: none;
+			border-radius: 5px;
+			font-size: 1.2rem;
+			color: white;
+			text-decoration: none;
+			box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+			transition: background-color 0.3s ease, transform 0.2s ease;
+			min-width: 10rem;
+			max-width: 10rem;
+			margin: 1rem;
+		}
+
+
+
+		div#paginationControls {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+
+
+		}
+
+		span#currentPage {
+			font-size: 2rem;
+			color: black;
+
+		}
+
+
+
+
+		form.form-container {
+			margin-top: 1.5rem;
+			cursor: pointer;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+			margin: 1rem;
+			padding: 0rem;
+			background-color: rgb(38, 78, 152);
+			border: none;
+			border-radius: 1rem;
+			font-size: 1rem;
+			color: white;
+			text-decoration: none;
+			box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+			transition: background-color 0.3s ease, transform 0.2s ease;
+			max-width: 35%;
+			min-width: 35%;
+
+
+
+
+
+
+		}
+
+
+
+		div.form-labels div,
+		div.form-fields div {
+			margin: 0rem;
+			padding: 0rem;
+			font-size: 1rem;
+
+			font-style: bold;
+		}
+
+		div.form-fields div input {
+			font-size: 1rem;
+			margin: 0rem;
+			padding: 0rem;
+		}
+
+
+		form.form-container div {
+			margin: .5rem;
+		}
+
+
+
+		div.get-all-prints-bottom {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			width: auto;
+
+		}
+	</style>
+
+</head>
+
+<body class="body-container">
+
+
+	<div>
+
+		<h1>Data from API</h1>
+
+	</div>
+
+
+
+	<form class="form-container" autocomplete="on">
+		<div class="form-labels">
+			<div>
+				<label>PAGE SIZE (Optional) : </label>
+
+			</div>
+			<div>
+				<label>DRAWING NAME (Optional) : </label>
+
+			</div>
+			<div>
+
+				<label>DIAMETER MIN : </label>
+
+			</div>
+			<div>
+				<label>DIAMETER MAX : </label>
+
+
+			</div>
+			<div>
+				<label>FACE LENGTH MIN : </label>
+
+			</div>
+			<div>
+				<label>FACE LENGTH MAX : </label>
+
+			</div>
+
+		</div>
+
+		<div class="form-fields">
+
+			<div>
+
+				<input id="pageSize" type="text" name="pageSize" placeholder="Enter Page Size..." />
+			</div>
+			<div>
+
+				<input id="drawingName" type="text" name="drawingName" placeholder="Enter Drawing Name..." />
+			</div>
+			<div>
+
+
+				<input id="diameterMinValue" type="text" name="diameterMinValue" placeholder="Enter Diameter Min"
+					required />
+			</div>
+			<div>
+
+
+				<input id="diameterMaxValue" type="text" name="diameterMaxValue" placeholder="Enter Diameter Max"
+					required />
+			</div>
+			<div>
+
+				<input id="faceLengthMinValue" type="text" name="faceLengthMinValue" placeholder="Enter Face Length Max"
+					required />
+			</div>
+			<div>
+
+				<input id="faceLengthMaxValue" type="text" name="faceLengthMaxValue" placeholder="Enter Face Length Min"
+					required />
+			</div>
+		</div>
+
+	</form>
+	<div>
+		<button id="get-all-prints" type="button">Get All Prints</button>
+
+	</div>
+
+
+	<div class="table-output">
+		<table>
+			<thead>
+				<tr>
+
+
+					<th>ID</th><!--#01-->
+					<th>PRINT NAME</th><!--#02-->
+					<th>CUST</th><!--#03-->
+					<th>OEM</th><!--#04-->
+					<th>DIA</th><!--#05-->
+					<th>FACE LENGTH</th><!--#06-->
+					<th>BEARING MIN</th><!--#07-->
+					<th>BEARING MAX</th><!--#08-->
+					<th>CUST PIN</th><!--#09-->
+					<th>CUST REVISION</th><!--#10-->
+					<th>DATE</th><!--#11-->
+					<th>DATE CREATED</th><!--#12-->
+					<th>ORIGIN CUST</th><!--#13-->
+					<th>PART NO</th><!--#14-->
+					<th>PREV PART NO</th><!--#15-->
+					<th>PROD CODE</th><!--#16-->
+					<th>REV NUM</th><!--#17-->
+					<th>STEPS</th><!--#18-->
+					<th>SUB CONTR</th><!--#19-->
+					<th>TYPE</th><!--#20-->
+					<th>DMG PATH</th><!--#21-->
+					<th>SCAN PATH</th><!--#22-->
+					<th>PDF PATH</th><!--#23-->
+
+
+				</tr>
+
+			</thead>
+
+			<tbody id="results" class="results">
+
+
+
+
+
+
+			</tbody>
+
+		</table>
+
+	</div>
+	<div class="get-all-prints-bottom">
+
+
+
+		<div id="paginationControls">
+			<button id="prevPage" type="button">Previous</button>
+			<span>
+				<div id="current-page">Page 1 </div>
+			</span>
+			<span>
+				<div>&nbsp;of &nbsp;</div>
+			</span>
+			<span>
+				<div id="total-pages">Page 1</div>
+			</span>
+			<button id="nextPage" type="button">Next</button>
+
+		</div>
+
+		<div class="home">
+			<a href="admin-home.html">Home</a>
+		</div>
+	</div>
+
+
+
+	<script>
+
+		let currentPage = 0;
+		let pageSize = 0; // Adjust as needed
+		let totalPages = 0; // Will be determined by the data
+
+
+		let drawingName = "";
+		let diameterMinValue = 0;
+		let diameterMaxValue = 0;
+		let faceLengthMinValue = 0;
+		let faceLengthMaxValue = 0;
+
+
+
+		// Attach event listener to form submission
+		// document.getElementById("filter-fields").addEventListener("submit", getFormFields);
+		function getDrawingName()
+		{
+			drawingName = "";
+			drawingName = document.getElementById("drawingName").value;
+
+			return drawingName;
+
+		}
+
+		function getPageSize()
+		{
+
+			pageSize = document.getElementById("pageSize").value;
+
+			if (pageSize != null && pageSize != 0) {
+
+				return pageSize;
+			} else {
+				pageSize = 50;
+				console.log("pageSize = " + pageSize)
+				return pageSize;
+			}
+		}
+		function getDiameterMinValue()
+		{
+			diameterMinValue = document.getElementById("diameterMinValue").value;
+			return diameterMinValue;
+		}
+
+		function getDiameterMaxValue()
+		{
+			diameterMaxValue = document.getElementById("diameterMaxValue").value;
+			return diameterMaxValue;
+		}
+		function getFaceLengthMinValue()
+		{
+			faceLengthMinValue = document.getElementById("faceLengthMinValue").value;
+			return faceLengthMinValue;
+
+		}
+		function getFaceLengthMaxValue()
+		{
+
+			faceLengthMaxValue = document.getElementById("faceLengthMaxValue").value;
+
+			return faceLengthMaxValue;
+		}
+
+
+
+
+		// Event listeners for pagination controls
+		document.getElementById('prevPage').addEventListener('click', () =>
+		{
+			if (currentPage > 1) {
+				currentPage--;
+				getAllPrints(currentPage);
+			}
+		});
+
+		document.getElementById('nextPage').addEventListener('click', () =>
+		{
+			if (currentPage < totalPages) {
+				currentPage++;
+				console.log("Clicked Next Page")
+				console.log("currentPage = " + currentPage)
+				getAllPrints(currentPage);
+			}
+		});
+
+
+
+		document.getElementById("get-all-prints").addEventListener("click", getAllPrints);
+
+		//GET ALL PRINTS
+		async function getAllPrints()
+		{
+
+			if (validateForm()) {
+				console.log("currentpage ==== " + currentPage);
+				pageSize = getPageSize();
+				console.log("pageSize = " + pageSize)
+				drawingName = getDrawingName();
+				diameterMinValue = getDiameterMinValue();
+				diameterMaxValue = getDiameterMaxValue();
+				faceLengthMinValue = getFaceLengthMinValue();
+				faceLengthMaxValue = getFaceLengthMaxValue();
+
+				console.log(pageSize);
+				console.log(drawingName);
+				console.log(diameterMinValue);
+				console.log(diameterMaxValue);
+				console.log(faceLengthMinValue);
+				console.log(faceLengthMaxValue);
+
+				document.getElementById("results").innerHTML = '';
+
+				console.log("getAllPrints() Method Start.......")
+
+				var secretKey = localStorage.getItem("authToken"); // Replace with your actual secret key
+
+				console.log("secret key = " + secretKey);
+
+				console.log("Enter Get All Prints");
+				const storedToken = localStorage.getItem("authToken");
+
+				if (!storedToken) {
+					alert("No authentication token found. Please log in.");
+					return;
+				}
+
+				try {
+
+
+					const response = await fetch(
+						`http://localhost:8080/api/pagination/${currentPage}/${pageSize}?sortField=diameterMinValue&drawingName=${drawingName}&diameterMinValue=${diameterMinValue}&diameterMaxValue=${diameterMaxValue}&faceLengthMinValue=${faceLengthMinValue}&faceLengthMaxValue=${faceLengthMaxValue}`, {
+						method: "GET",
+						headers: {
+							Authorization: `Bearer ${storedToken}`,
+							"Content-Type": "application/json",
+						},
+					});
+
+					if (!response.ok) {
+						alert("failed to fetch prints")
+						throw new Error("Failed to fetch prints");
+					}
+
+					const data = await response.json(); // Fixed JSON parsing
+
+					// Store the token in localStorage if needed
+					// localStorage.setItem("token", data.token);
+
+					// Display success message
+					console.log(data);
+
+
+					totalPages = data.totalPages;
+
+					// populateTable(data);
+					console.log("currentPage = " + currentPage);
+					console.log("total-pages = " + totalPages);
+					const contentArray = data.content;
+					// let htmlOutput = createPrintDrawingHtml();
+					// console.log("contentArray[0] =======> " + contentArray[0]);
+
+
+					const arrayOfObjects = [];
+
+					for (let i = 0; i < contentArray.length; i++) {
+
+						let htmlOutputTemp = createPrintDrawingHtml(contentArray[i]);
+
+						document.getElementById("results").innerHTML += htmlOutputTemp;
+
+						htmlOutputTemp == 0;
+					}
+
+					// alert("Fetched print data successfully!")
+
+					// window.location.href = "get-all-prints.html";
+					document.getElementById('current-page').innerHTML = currentPage;
+					document.getElementById('total-pages').innerHTML = totalPages;
+
+
+				} catch (error) {
+					console.error("Error:", error);
+					alert("Failed to fetch prints: " + error.message);
+				}
+			}
+		}
+
+
+
+
+
+		document.addEventListener("DOMContentLoaded", function ()
+		{
+			console.log("DOMContentLoaded() Method Start.......")
+			// Assuming the bearer token is stored in localStorage, sessionStorage, or a cookie.
+			// Replace 'your_bearer_token_key' with the actual key.
+
+			let bearerToken = localStorage.getItem("authToken"); // Example using localStorage
+
+			// console.log("bearerToken ======= " + bearerToken);
+			if (bearerToken) {
+				console.log("Bearer Token:", bearerToken);
+			} else {
+				console.log("Bearer Token not found.");
+				//Check other storage locations.
+				bearerToken = sessionStorage.getItem("token");
+				if (bearerToken) {
+					console.log("Bearer Token (sessionStorage):", bearerToken);
+				} else {
+					//check cookies.
+					function getCookie(name)
+					{
+						let cookieValue = null;
+						if (document.cookie && document.cookie !== "") {
+							const cookies = document.cookie.split(";");
+							for (let i = 0; i < cookies.length; i++) {
+								const cookie = cookies[i].trim();
+								// Does this cookie string begin with the name we want?
+								if (cookie.substring(0, name.length + 1) === name + "=") {
+									cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+									break;
+								}
+							}
+						}
+						return cookieValue;
+					}
+
+					bearerToken = getCookie("token");
+
+					if (bearerToken) {
+						console.log("Bearer Token (cookie):", bearerToken);
+					} else {
+						console.log("Bearer Token not found in sessionStorage or cookie.");
+					}
+				}
+			}
+		});
+
+		function createPrintDrawingHtml(contentArray)
+		{
+
+			console.log("createPrintDrawingHtml() Method Start.......")
+			let htmlOutput = `
+
+						<td> ${contentArray.id}</td>
+    <td>${contentArray.drawingName}</td>
+    <td> ${contentArray.customer}</td>
+    <td> ${contentArray.oem}</td>
+    <td>${contentArray.diameterMinValue}</td>
+    <td> ${contentArray.faceLengthMinValue}</td>
+    <td> ${contentArray.bearingMin}</td>
+    <td> ${contentArray.bearingMax}</td>
+    <td>${contentArray.customerPin}</td>
+    <td> ${contentArray.customerRevision}</td>
+    <td> ${contentArray.date}</td>
+    <td> ${contentArray.dateCreated}</td>
+    <td> ${contentArray.originatingCustomer}</td>
+    <td>${contentArray.partNo}</td>
+    <td>${contentArray.prevPartNo}</td>
+    <td>${contentArray.productCode}</td>
+    <td> ${contentArray.revNumber}</td>
+    <td> ${contentArray.steps}</td>
+	   <td> ${contentArray.subcontractor}</td>
+	       <td> ${contentArray.type}</td>
+	   	   <td> ${contentArray.dmgDrawingPath}</td>
+	   <td> ${contentArray.scannedPath}</td>
+	   	   <td> ${contentArray.pdfPath}</td>
+
+	  
+`;
+
+
+			return htmlOutput;
+		};
+
+
+
+		validateForm();
+
+		document.addEventListener('click', validateForm);
+
+		document.addEventListener('keydown', function (event)
+		{
+			if (event.key === 'Enter') {
+				validateForm()
+			}
+		});
+
+
+		function validateForm()
+		{
+			let diameterMinValue = document.getElementById("diameterMinValue").value;
+			let diameterMaxValue = document.getElementById("diameterMaxValue").value;
+			let faceLengthMinValue = document.getElementById("faceLengthMinValue").value;
+			let faceLengthMaxValue = document.getElementById("faceLengthMaxValue").value;
+
+
+			// Reset background colors
+			document.getElementById("diameterMinValue").style.backgroundColor = "#FFFFFF";
+			document.getElementById("diameterMaxValue").style.backgroundColor = "#FFFFFF";
+			document.getElementById("faceLengthMinValue").style.backgroundColor = "#FFFFFF";
+			document.getElementById("faceLengthMaxValue").style.backgroundColor = "#FFFFFF";
+
+			if (diameterMinValue === "" || diameterMaxValue === "" || faceLengthMinValue === "" || faceLengthMaxValue === "") {
+				// alert("Please fill in all required fields.");
+
+				if (diameterMinValue === "") {
+					document.getElementById("diameterMinValue").style.backgroundColor = "#f69291";
+				}
+
+				if (diameterMaxValue === "") {
+					document.getElementById("diameterMaxValue").style.backgroundColor = "#f69291";
+				}
+
+				if (faceLengthMinValue === "") {
+					document.getElementById("faceLengthMinValue").style.backgroundColor = "#f69291";
+				}
+
+
+				if (faceLengthMaxValue === "") {
+					document.getElementById("faceLengthMaxValue").style.backgroundColor = "#f69291";
+				}
+				return false;
+			}
+
+
+			return true;
+		}
+	</script>
+
+</body>
+
+</html>
