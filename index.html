@@ -86,9 +86,10 @@
 
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
-
+            const apiBaseUrl = process.env.API_BASE_URL;
             try {
-                const response = await fetch("http://localhost:8080/api/https://printdrawingsearchapi-production.up.railway.app/api/authenticate", {
+
+                const response = await fetch(`&{apiBaseUrl}/api/authenticate`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

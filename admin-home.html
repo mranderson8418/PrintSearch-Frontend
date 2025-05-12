@@ -68,14 +68,14 @@
 
 			console.log("Enter Get All Prints");
 			const storedToken = localStorage.getItem("authToken");
-
+			const apiBaseUrl = process.env.API_BASE_URL;
 			if (!storedToken) {
 				alert("No authentication token found. Please log in.");
 				return;
 			}
 
 			try {
-				const response = await fetch("https://printdrawingsearchapi-production.up.railway.app/api/print?pageNo=0&pageSize=10", {
+				const response = await fetch(`${apiBaseUrl}/api/print?pageNo=0&pageSize=10`, {
 					method: "GET",
 					headers: {
 						Authorization: `Bearer ${storedToken}`,
