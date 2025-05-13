@@ -17,7 +17,7 @@ async function getAllPrints() {
 
 	console.log("Enter Get All Prints");
 	const storedToken = localStorage.getItem("authToken");
-	const apiBaseUrl = process.env.API_BASE_URL;
+
 	if (!storedToken) {
 		alert("No authentication token found. Please log in.");
 		return;
