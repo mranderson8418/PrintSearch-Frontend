@@ -75,6 +75,7 @@
 			}
 
 			try {
+				const apiBaseUrl = process.env.API_BASE_URL;
 				const response = await fetch(`${apiBaseUrl}/api/print?pageNo=0&pageSize=10`, {
 					method: "GET",
 					headers: {

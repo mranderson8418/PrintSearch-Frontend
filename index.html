@@ -86,9 +86,9 @@
 
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
-            const apiBaseUrl = process.env.API_BASE_URL;
-            try {
 
+            try {
+                const apiBaseUrl = process.env.API_BASE_URL;
                 const response = await fetch(`&{apiBaseUrl}/api/authenticate`, {
                     method: "POST",
                     headers: {

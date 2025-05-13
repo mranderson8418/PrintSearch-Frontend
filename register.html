@@ -99,8 +99,9 @@
 					password: password, // Removed template literals here
 					role: role, // Removed template literals here
 				};
-				const apiBaseUrl = process.env.API_BASE_URL;
+
 				try {
+					const apiBaseUrl = process.env.API_BASE_URL;
 					const response = await fetch(`${apiBaseUrl}/api/register/user`, {
 						method: "POST",
 						headers: {

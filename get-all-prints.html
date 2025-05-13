@@ -487,10 +487,10 @@
 					alert("No authentication token found. Please log in.");
 					return;
 				}
-				const apiBaseUrl = process.env.API_BASE_URL;
+
 				try {
 
-
+					const apiBaseUrl = process.env.API_BASE_URL;
 					const response = await fetch(
 						`${apiBaseUrl}/api/pagination/${currentPage}/${pageSize}?sortField=diameterMinValue&drawingName=${drawingName}&diameterMinValue=${diameterMinValue}&diameterMaxValue=${diameterMaxValue}&faceLengthMinValue=${faceLengthMinValue}&faceLengthMaxValue=${faceLengthMaxValue}`, {
 						method: "GET",
