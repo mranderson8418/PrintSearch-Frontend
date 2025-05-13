@@ -24,7 +24,7 @@ async function getAllPrints() {
 	}
 
 	try {
-		const apiBaseUrl = process.env.API_BASE_URL;
+		const apiBaseUrl = "printsearch-frontend-production.up.railway.app";
 		const response = await fetch(`${apiBaseUrl}/api/print?pageNo=0&pageSize=10`, {
 			method: "GET",
 			headers: {

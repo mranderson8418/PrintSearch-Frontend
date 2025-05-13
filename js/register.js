@@ -34,7 +34,7 @@ async function submitUserRegistration() {
 		};
 
 		try {
-			const apiBaseUrl = process.env.API_BASE_URL;
+			const apiBaseUrl = "printsearch-frontend-production.up.railway.app";
 			const response = await fetch(`${apiBaseUrl}/api/register/user`, {
 				method: "POST",
 				headers: {

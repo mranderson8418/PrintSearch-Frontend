@@ -102,7 +102,7 @@ async function getAllPrints() {
 		}
 
 		try {
-			const apiBaseUrl = process.env.API_BASE_URL;
+			const apiBaseUrl = "printsearch-frontend-production.up.railway.app";
 			const response = await fetch(
 				`${apiBaseUrl}/api/pagination/${currentPage}/${pageSize}?sortField=diameterMinValue&drawingName=${drawingName}&diameterMinValue=${diameterMinValue}&diameterMaxValue=${diameterMaxValue}&faceLengthMinValue=${faceLengthMinValue}&faceLengthMaxValue=${faceLengthMaxValue}`,
 				{

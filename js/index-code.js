@@ -22,7 +22,7 @@ async function loginUser(event) {
 	const password = document.getElementById("password").value;
 
 	try {
-		const apiBaseUrl = process.env.API_BASE_URL;
+		const apiBaseUrl = "printsearch-frontend-production.up.railway.app";
 		const response = await fetch(`&{apiBaseUrl}/api/authenticate`, {
 			method: "POST",
 			headers: {
