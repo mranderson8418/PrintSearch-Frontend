@@ -10,17 +10,14 @@ formE1.addEventListener("submit", (event) => {
 	console.log(data);
 
 	let htmlOutput = `
-		    <p><strong>Email:</strong> ${data.email}</p>
-			<p><strong>Password:</strong> ${data.password}</p>
-			<p><strong>Role:</strong> ${data.role}</p>`;
+	<p><strong>Email:</strong> ${data.email}</p>
+	<p><strong>Password:</strong> ${data.password}</p>
+	<p><strong>Role:</strong> ${data.role}</p>`;
 
-    document.getElementById("results").innerHTML = htmlOutput;
-    
+	document.getElementById("results").innerHTML = htmlOutput;
 
-    setTimeout(submitUserRegistration, 3000);
+	setTimeout(submitUserRegistration, 3000);
 });
-
-
 
 async function submitUserRegistration() {
 	if (validateForm()) {
@@ -37,7 +34,8 @@ async function submitUserRegistration() {
 		};
 
 		try {
-			const response = await fetch("http://localhost:8080/register/user", {
+			const apiBaseUrl = process.env.API_BASE_URL;
+			const response = await fetch(`${apiBaseUrl}/api/register/user`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -57,15 +55,24 @@ async function submitUserRegistration() {
 			console.log("token = " + token);
 
 			alert("Registration Successful! Redirecting...");
-		window.location.href = "admin-home.html";
+
+			window.location.href = `${apiBaseUrl}`;
 		} catch (error) {
 			console.error("Error:", error);
-			document.getElementById("results").innerText = "Registration failed: " + error.message;
+			document.getElementById("results").innerText = "Registration failed I am sorry: " + error.message;
 		}
 	}
 }
 
 validateForm();
+
+document.addEventListener("click", validateForm);
+
+document.addEventListener("keydown", function (event) {
+	if (event.key === "Enter") {
+		validateForm();
+	}
+});
 
 function validateForm() {
 	let emailField = document.getElementById("email").value;
@@ -74,12 +81,12 @@ function validateForm() {
 	let roleField = document.getElementById("role").value;
 
 	// Reset background colors
-	document.getElementById("email").style.backgroundColor = "";
-	document.getElementById("password").style.backgroundColor = "";
-	document.getElementById("passwordTest").style.backgroundColor = "";
+	document.getElementById("email").style.backgroundColor = "#FFFFFF";
+	document.getElementById("password").style.backgroundColor = "#FFFFFF";
+	document.getElementById("passwordTest").style.backgroundColor = "#FFFFFF";
 
 	if (emailField === "" || passwordField === "" || passwordTestField === "") {
-		alert("Please fill in all required fields.");
+		// alert("Please fill in all required fields.");
 
 		if (emailField === "") {
 			document.getElementById("email").style.backgroundColor = "#f69291";
@@ -96,7 +103,7 @@ function validateForm() {
 	}
 
 	if (passwordField !== passwordTestField) {
-		alert("Passwords do not match");
+		// alert("Passwords do not match");
 
 		document.getElementById("password").style.backgroundColor = "#f69291";
 		document.getElementById("passwordTest").style.backgroundColor = "#f69291";
