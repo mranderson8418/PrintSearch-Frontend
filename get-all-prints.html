@@ -471,7 +471,7 @@
 				}
 
 				try {
-					const apiBaseUrl = "printdrawingsearchapi-production.up.railway.app";
+					const apiBaseUrl = "http://printdrawingsearchapi-production.up.railway.app/";
 					const response = await fetch(
 						`${apiBaseUrl}/api/pagination/${currentPage}/${pageSize}?sortField=diameterMinValue&drawingName=${drawingName}&diameterMinValue=${diameterMinValue}&diameterMaxValue=${diameterMaxValue}&faceLengthMinValue=${faceLengthMinValue}&faceLengthMaxValue=${faceLengthMaxValue}`,
 						{

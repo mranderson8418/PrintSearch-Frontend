@@ -68,7 +68,7 @@
 			}
 
 			try {
-				const apiBaseUrl = "printdrawingsearchapi-production.up.railway.app";
+				const apiBaseUrl = "http://printdrawingsearchapi-production.up.railway.app/";
 				const response = await fetch(`${apiBaseUrl}/api/print?pageNo=0&pageSize=10`, {
 					method: "GET",
 					headers: {
