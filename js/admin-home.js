@@ -49,7 +49,7 @@ async function getAllPrints() {
 		// let htmlOutput = createPrintDrawingHtml();
 		console.log("contentArray[0]======= " + contentArray[0]);
 
-		const arrayOfObjects = [];
+		// const arrayOfObjects = [];
 
 		for (let i = 0; i < contentArray.length; i++) {
 			let htmlOutputTemp = createPrintDrawingHtml(contentArray[i]);
@@ -63,7 +63,7 @@ async function getAllPrints() {
 
 		alert("Fetched print data successfully!");
 
-		// window.location.href = "get-all-prints.html";
+		window.location.href = "get-all-prints.html";
 	} catch (error) {
 		console.error("Error:", error);
 		alert("Failed to fetch prints: " + error.message);
