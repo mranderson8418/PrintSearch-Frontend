@@ -25,6 +25,7 @@ div.table-output table {
 	min-width: 100%;
 	max-width: 100%;
 	border-collapse: collapse;
+	background-color: white;
 }
 
 div.table-output table thead tr th {
