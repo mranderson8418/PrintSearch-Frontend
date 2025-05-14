@@ -22,7 +22,7 @@ h3 {
 }
 div.container form button.scott-button {
 	width: 100%;
-	background-color: rgb(38, 78, 152);
+	background-color: rgb(83, 109, 158);
 	color: white;
 	font-size: 1rem;
 	padding: 0.75rem;
@@ -34,7 +34,7 @@ div.container form button.scott-button {
 }
 
 div.container form button.scott-button:hover {
-	background-color: #45a049;
+	background-color: rgb(38, 78, 152);
 	transform: translateY(-2px);
 }
 
@@ -43,7 +43,7 @@ div.container form button.scott-button:active {
 }
 .container {
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-	background-color: rgb(78, 176, 97);
+	background-color: rgb(38, 78, 152);
 	border-radius: 15px;
 	padding: 2rem;
 	max-width: 90%;
@@ -67,7 +67,7 @@ h2 {
 	display: block;
 	margin: 10px 0;
 	padding: 15px;
-	background-color: rgb(103, 206, 103);
+	background-color: rgb(83, 109, 158);
 	border: none;
 	border-radius: 5px;
 	font-size: 1.2rem;
