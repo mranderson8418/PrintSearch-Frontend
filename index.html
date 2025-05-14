@@ -80,7 +80,7 @@
             const password = document.getElementById("password").value;
 
             try {
-                const apiBaseUrl = "printdrawingsearchapi.railway.internal";
+                const apiBaseUrl = "https://printdrawingsearchapi-production.up.railway.app";
                 const response = await fetch(`&{apiBaseUrl}/api/authenticate`, {
                     method: "POST",
                     headers: {
