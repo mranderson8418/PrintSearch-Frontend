@@ -1,6 +1,12 @@
+html {
+	background-image: url("../images/background.jpg");
+	background-size: cover; /* Or 'contain' depending on your preference */
+	background-repeat: no-repeat; /* Prevent the image from tiling */
+	background-attachment: fixed;
+}
+
 /* General styles */
 body {
-	background-color: rgb(100, 195, 238);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -71,7 +77,8 @@ div.scott-button-submit {
 	margin: 1rem 2rem 1rem 2rem;
 }
 
-div.scott-button-submit button, div.print-to-screen button {
+div.scott-button-submit button,
+div.print-to-screen button {
 	background-color: rgb(103, 206, 103);
 	color: white;
 	padding: 1rem 2rem 1rem 2rem;
@@ -83,7 +90,7 @@ div.scott-button-submit button, div.print-to-screen button {
 	min-width: 10rem;
 	max-width: 10rem;
 	text-decoration: none;
-	margin:1rem;
+	margin: 1rem;
 }
 
 div.scott-button-home a {
@@ -113,15 +120,13 @@ div#results {
 	margin: 2rem;
 	border: solid 5px red;
 	background-color: white;
-	color:red;
+	color: red;
 	padding: 2rem;
-	border:solid 5px red;
+	border: solid 5px red;
 }
 
-div#results p{
-	color:red;
-	
-	
+div#results p {
+	color: red;
 }
 
 /* Ensure form-container is centered and responsive */
@@ -146,5 +151,4 @@ div#results p{
 		font-size: 0.9rem;
 		border: solid 5px red;
 	}
-
 }

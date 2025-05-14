@@ -1,133 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Login Page</title>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login Page</title>
+		<link rel="stylesheet" href="/css/styleLogin.css" />
 
-    <link rel="stylesheet" href="/css/styleLogin.css" />
+		<script src="/js/index-code.js" defer></script>
+	</head>
 
-    <!-- <script src="js/index-code.js" defer></script> -->
+	<body>
+		<div class="container">
+			<h1>Print Search Manager</h1>
+			<h2>Version 2.0</h2>
+			<h2>Login</h2>
 
-</head>
+			<form id="loginForm" autocomplete="on">
+				<div class="form-group">
+					<label for="username">Username: </label>
+					<input id="username" type="text" name="username" placeholder="Enter username..." required />
+				</div>
 
-<body>
-    <div class="container">
-        <h1>Print Search Manager</h1>
-        <h2>Version 2.0</h2>
-        <h2>Login</h2>
+				<div class="form-group">
+					<label for="password">Password: </label>
+					<input type="password" id="password" placeholder="Enter password" style="width: 100%; padding-right: 30px" />
+					<span id="togglePassword" style="position: absolute; min-height: 5rem; min-width: 5rem; cursor: pointer; padding: 1rem">
+						👁️
+					</span>
+				</div>
+				<button class="scott-button" id="submit-button" type="submit">Submit</button>
+				<div id="results"></div>
+			</form>
 
-        <form id="loginForm" autocomplete="on">
-            <div class="form-group">
-                <label for="username">Username: </label>
-                <input id="username" type="text" name="username" placeholder="Enter username..." required />
-            </div>
+			<div class="button-link">
+				<a href="register.html">Register New User</a>
+			</div>
+			<div class="button-link">
+				<a href="">User Home</a>
+			</div>
+			<div class="button-link">
+				<a href="admin-home.html">Admin Home</a>
+			</div>
+			<div class="button-link">
+				<a href="">Logout</a>
+			</div>
+		</div>
+		<script>
+			//Toggle password viewer
+			const passwordInput = document.getElementById("password");
+			const togglePassword = document.getElementById("togglePassword");
 
+			togglePassword.addEventListener("click", () => {
+				const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+				passwordInput.setAttribute("type", type);
 
+				// Optionally toggle the icon
+				togglePassword.textContent = type === "password" ? "👁️" : "🙈";
+			});
 
-            <div class="form-group">
-                <label for="password">Password: </label>
-                <input type="password" id="password" placeholder="Enter password"
-                    style="width: 100%; padding-right: 30px;">
-                <span id="togglePassword"
-                    style="position: absolute; min-height: 5rem; min-width: 5rem; cursor: pointer; padding:1rem;">
-                    👁️
-                </span>
-            </div>
-            <button class="scott-button" id="submit-button" type="submit">Submit</button>
-            <div id="results"></div>
-        </form>
+			// Attach event listener to form submission
+			document.getElementById("loginForm").addEventListener("submit", loginUser);
 
-        <div class="button-link">
-            <a href="register.html">Register New User</a>
-        </div>
-        <div class="button-link">
-            <a href="">User Home</a>
-        </div>
-        <div class="button-link">
-            <a href="admin-home.html">Admin Home</a>
-        </div>
-        <div class="button-link">
-            <a href="">Logout</a>
-        </div>
+			// Function to handle login
+			async function loginUser(event) {
+				event.preventDefault(); // Prevent default form submission
+				console.log("submit button clicked");
 
-    </div>
-    <script>
-        //Toggle password viewer
-        const passwordInput = document.getElementById("password");
-        const togglePassword = document.getElementById("togglePassword");
+				const username = document.getElementById("username").value;
+				const password = document.getElementById("password").value;
 
-        togglePassword.addEventListener("click", () =>
-        {
-            const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
-            passwordInput.setAttribute("type", type);
+				try {
+					const loginPage = "https://printsearch-frontend-production.up.railway.app";
+					const apiBaseUrl = "https://printdrawingsearchapi-production.up.railway.app";
+					const response = await fetch(`${apiBaseUrl}/api/authenticate`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ username, password }),
+					});
 
-            // Optionally toggle the icon
-            togglePassword.textContent = type === "password" ? "👁️" : "🙈";
-        });
+					console.log("response =====> " + response);
+					console.log(typeof response);
 
-        // Attach event listener to form submission
-        document.getElementById("loginForm").addEventListener("submit", loginUser);
+					if (!response.ok) {
+						const errorText = await response.text();
+						throw new Error(`Login Failed: ${errorText || "Invalid credentials"}`);
+					} else {
+						// If the backend returns a plain String token, use response.text()
+						response
+							.text()
+							.then((token) => {
+								console.log("Bearer Token: ", token);
 
-        // Function to handle login
-        async function loginUser(event)
-        {
-            event.preventDefault(); // Prevent default form submission
-            console.log("submit button clicked");
-
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
-
-            try {
-
-                const loginPage = "https://printsearch-frontend-production.up.railway.app";
-                const apiBaseUrl = "https://printdrawingsearchapi-production.up.railway.app";
-                const response = await fetch(`${apiBaseUrl}/api/authenticate`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ username, password }),
-                });
-
-                console.log("response =====> " + response);
-                console.log(typeof response);
-
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`Login Failed: ${errorText || "Invalid credentials"}`);
-                } else {
-                    // If the backend returns a plain String token, use response.text()
-                    response
-                        .text()
-                        .then((token) =>
-                        {
-                            console.log("Bearer Token: ", token);
-
-                            // Store the bearer token (example using localStorage)
-                            localStorage.setItem("authToken", token);
-                            console.log("authToken: ", token);
-                            // Redirect to landing page after successful login and token retrieval
-                            alert("Login Successful! Redirecting...");
-                            window.location.href = `${loginPage}/admin-home.html`;
-                        })
-                        .catch((error) =>
-                        {
-                            console.error("Error getting text response:", error);
-                            alert("Login Failed: Could not read server response.");
-                        });
-                }
-            } catch (error) {
-                console.error("Login error: ", error);
-                alert("Login Failed: " + error.message);
-            }
-        }
-
-
-
-    </script>
-
-</body>
-
+								// Store the bearer token (example using localStorage)
+								localStorage.setItem("authToken", token);
+								console.log("authToken: ", token);
+								// Redirect to landing page after successful login and token retrieval
+								alert("Login Successful! Redirecting...");
+								window.location.href = `${loginPage}/admin-home.html`;
+							})
+							.catch((error) => {
+								console.error("Error getting text response:", error);
+								alert("Login Failed: Could not read server response.");
+							});
+					}
+				} catch (error) {
+					console.error("Login error: ", error);
+					alert("Login Failed: " + error.message);
+				}
+			}
+		</script>
+	</body>
 </html>

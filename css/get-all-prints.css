@@ -1,0 +1,168 @@
+html {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+html {
+	background-image: url("../images/background.jpg");
+	background-size: cover; /* Or 'contain' depending on your preference */
+	background-repeat: no-repeat; /* Prevent the image from tiling */
+	background-attachment: fixed;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 15px;
+}
+
+div.table-output table {
+	min-height: 2rem;
+	min-width: 100%;
+	max-width: 100%;
+	border-collapse: collapse;
+}
+
+div.table-output table thead tr th {
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	max-height: 4 rem;
+	background-color: rgb(38, 78, 152);
+	color: white;
+}
+
+div.table-output table thead tr td {
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	max-height: 4 rem;
+	background-color: rgb(38, 78, 152);
+	color: white;
+}
+
+th,
+td {
+	border: 0.125rem solid black;
+	padding: clamp(0.8rem 1rem 2rem);
+	text-align: center;
+}
+
+th {
+	background-color: #f2f2f2;
+}
+
+@media print {
+	@page {
+		size: landscape;
+	}
+}
+
+div.home {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-top: 1.5rem;
+	cursor: pointer;
+	margin: 10px 0;
+	padding: 0.5rem;
+	background-color: rgb(38, 78, 152);
+	border: none;
+	border-radius: 5px;
+	font-size: 1.2rem;
+	color: white;
+	text-decoration: none;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	min-width: 10rem;
+	max-width: 10rem;
+	margin: 1rem;
+}
+
+div.home a {
+	text-decoration: none;
+}
+
+button#get-all-prints,
+button#prevPage,
+button#nextPage {
+	margin-top: 1.5rem;
+	cursor: pointer;
+	display: block;
+	margin: 10px 0;
+	padding: 0.5rem;
+	background-color: rgb(38, 78, 152);
+	border: none;
+	border-radius: 5px;
+	font-size: 1.2rem;
+	color: white;
+	text-decoration: none;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	min-width: 10rem;
+	max-width: 10rem;
+	margin: 1rem;
+}
+
+div#paginationControls {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+span#currentPage {
+	font-size: 2rem;
+	color: black;
+}
+
+form.form-container {
+	margin-top: 1.5rem;
+	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin: 1rem;
+	padding: 0rem;
+	background-color: rgb(38, 78, 152);
+	border: none;
+	border-radius: 1rem;
+	font-size: 1rem;
+	color: white;
+	text-decoration: none;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	max-width: 35%;
+	min-width: 35%;
+}
+
+div.form-labels div,
+div.form-fields div {
+	margin: 0rem;
+	padding: 0rem;
+	font-size: 1rem;
+
+	font-style: bold;
+}
+
+div.form-fields div input {
+	font-size: 1rem;
+	margin: 0rem;
+	padding: 0rem;
+}
+
+form.form-container div {
+	margin: 0.5rem;
+}
+
+div.get-all-prints-bottom {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: auto;
+}
