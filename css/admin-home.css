@@ -5,15 +5,13 @@ html {
 	background-attachment: fixed;
 }
 
-
-
 body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
 	margin: 0;
-	background-color: rgb(100, 195, 238);
+
 	font-family: Arial, sans-serif;
 	color: white;
 	text-align: center;
