@@ -80,8 +80,10 @@
             const password = document.getElementById("password").value;
 
             try {
+
+                const loginPage = "https://printsearch-frontend-production.up.railway.app";
                 const apiBaseUrl = "https://printdrawingsearchapi-production.up.railway.app";
-                const response = await fetch(`&{apiBaseUrl}/api/authenticate`, {
+                const response = await fetch(`${apiBaseUrl}/api/authenticate`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -108,7 +110,7 @@
                             console.log("authToken: ", token);
                             // Redirect to landing page after successful login and token retrieval
                             alert("Login Successful! Redirecting...");
-                            window.location.href = "admin-home.html";
+                            window.location.href = `${loginPage}/admin-home.html`;
                         })
                         .catch((error) =>
                         {
